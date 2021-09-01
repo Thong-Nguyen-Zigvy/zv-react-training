@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
 position: relative;
     min-height: 400px;
-    max-width: 1760px;
     width: 100%;
     height: 90vh;
 
