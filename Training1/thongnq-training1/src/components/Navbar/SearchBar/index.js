@@ -1,5 +1,5 @@
 import React from "react";
-import { Wrapper, Content, TopSearch, BottomSearch, Location, Check, Guest, Separator, SearchButton } from "./SearchBar.styles";
+import { Wrapper, Content, TopSearch, BottomSearch, Location, Check, Guest, Separator, SearchButton, Label, Des, SearchContainer } from "./SearchBar.styles";
 
 
 const SearchBar = () => (
@@ -26,7 +26,7 @@ const SearchBar = () => (
                 <Location>
                     <label>
                         <div>
-                            <div>Location</div>
+                            <Label>Location</Label>
 
                             <input placeholder="Where are you going?"></input>
                         </div>
@@ -36,45 +36,45 @@ const SearchBar = () => (
                 <Separator />
 
                 <Check>
-                    <div className="check">
+                    <SearchContainer>
                         <div>
-                            <div>
+                            <Label>
                                 Check in
-                            </div>
+                            </Label>
 
-                            <div>
+                            <Des>
                                 Add dates
-                            </div>
+                            </Des>
                         </div>
-                    </div>    
+                    </SearchContainer>    
                         <Separator />    
-                    <div className="check">
+                    <SearchContainer>
                         <div>
-                            <div>
+                            <Label>
                                 Check out
-                            </div>
+                            </Label>
 
-                            <div>
+                            <Des>
                                 Add dates
-                            </div>
+                            </Des>
                         </div>
-                    </div>  
+                    </SearchContainer>  
                 </Check>
 
                 <Separator />
 
                 <Guest>
-                    <div className="guest">
+                    <SearchContainer>
                         <div>
-                            <div>
+                            <Label>
                                 Guests
-                            </div>
+                            </Label>
 
-                            <div>
+                            <Des>
                                 Add guests
-                            </div>
+                            </Des>
                         </div>
-                    </div>
+                    </SearchContainer>
 
                     <div className="search__icon">
                         <SearchButton>

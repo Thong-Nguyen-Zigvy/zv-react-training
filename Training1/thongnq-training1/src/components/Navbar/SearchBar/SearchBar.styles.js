@@ -113,14 +113,6 @@ export const Location = styled.div`
         div{
             position: relative;
 
-            div{
-                font-size: 12px;
-                line-height: 16px;
-                font-weight: 800;
-                letter-spacing: 0.04em;
-                padding-bottom: 2px;
-            }
-
             input{
                 display: block;
                 border: none;
@@ -144,36 +136,6 @@ export const Check = styled.div`
     display: flex;
     flex: 2 0 0%;
 
-    .check{
-        display: flex;
-        flex: 1 0 0%;
-        align-items:center;
-        margin: -1px;
-        padding: 14px 24px;
-
-        div{
-            display: inline-block;
-            position: relative;
-
-            div:nth-child(1){
-                font-size: 12px;
-                line-height: 16px;
-                font-weight: 800;
-                letter-spacing: 0.04em;            
-                padding-bottom: 2px;
-            }
-
-            div:nth-child(2){
-                font-size: 13.3333px;
-                line-height: 18px;
-                color: #717171;
-                font-weight: 400;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                width: 100%;
-            }
-        }
-    }
 `
 
 export const Guest = styled.div`
@@ -181,37 +143,6 @@ export const Guest = styled.div`
     align-items: center;
     margin: -1px;
     flex: 0.95 0 0%;
-
-    .guest{
-        display: flex;
-        flex: 1 0 0%;
-        align-items:center;
-        margin: -1px;
-        padding: 14px 24px;
-
-        div{
-            display: inline-block;
-            position: relative;
-
-            div:nth-child(1){
-                font-size: 12px;
-                line-height: 16px;
-                font-weight: 800;
-                letter-spacing: 0.04em;            
-                padding-bottom: 2px;
-            }
-
-            div:nth-child(2){
-                font-size: 13.3333px;
-                line-height: 18px;
-                color: #717171;
-                font-weight: 400;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                width: 100%;
-            }
-        }
-    }
 
     .search__icon{
         position: relative;
@@ -242,4 +173,35 @@ export const SearchButton = styled.button`
         transform: translateX(9px);
     }
 
+`
+
+export const Label = styled.div`
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 800;
+    letter-spacing: 0.04em;            
+    padding-bottom: 2px;
+`
+
+export const Des = styled.div`
+    font-size: 13.3333px;
+    line-height: 18px;
+    color: #717171;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+`
+
+export const SearchContainer = styled.div`
+        display: flex;
+        flex: 1 0 0%;
+        align-items:center;
+        margin: -1px;
+        padding: 14px 24px;
+
+        div{
+            display: inline-block;
+            position: relative;
+        }
 `
