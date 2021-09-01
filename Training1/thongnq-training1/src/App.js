@@ -5,6 +5,7 @@ import { GlobalStyle } from "./GlobalStyle";
 import Header from "./components/Header";
 import Explore from "./components/section/Explore";
 import LiveAnywhere from "./components/section/LiveAnywhere";
+import Hosting from "./components/section/Hosting";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
       <Header />
       <Explore />
       <LiveAnywhere />
+      <Hosting />
       <GlobalStyle />
     </div>
   );
