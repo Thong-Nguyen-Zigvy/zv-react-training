@@ -44,5 +44,16 @@ export const Content = styled.div`
                 white-space: pre-line;
             }
         }
+
+        .textContent{
+            overflow: clip;
+            margin-top: 4px;
+            font-size: 14px;
+            line-height: 18px;
+            max-height: 54px;
+            text-overflow: ellipsis;
+            color: rgb(113,113,113);
+            font-weight: 400;
+        }
     }
 `;

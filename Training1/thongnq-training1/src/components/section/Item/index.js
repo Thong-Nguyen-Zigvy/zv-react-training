@@ -2,7 +2,7 @@ import React from "react";
 
 import { Wrapper, Content } from "./Item.styles";
 
-const Item = ({url, text}) => (
+const Item = ({url, headline, text}) => (
     <Wrapper>
         <Content>
             <a>
@@ -11,8 +11,14 @@ const Item = ({url, text}) => (
                 </div>
 
                 <div>
+                    <span>{headline}</span>
+                </div>
+
+                {text ? 
+                <div className="textContent">
                     <span>{text}</span>
                 </div>
+                : null}
             </a>
         </Content>
     </Wrapper>

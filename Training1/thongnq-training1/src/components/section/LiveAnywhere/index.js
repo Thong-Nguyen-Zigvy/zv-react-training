@@ -4,7 +4,7 @@ import { Wrapper, Content } from "./LiveAnywhere.styles";
 
 import SectionWrapper from "../SectionWrapper";
 
-import Item from "./Item";
+import Item from "../Item";
 
 const LiveAnywhere = () => (
     <Wrapper>
@@ -12,13 +12,13 @@ const LiveAnywhere = () => (
             <Content>
                 <ul>
                     <li><Item url="https://a0.muscache.com/im/pictures/2f13349d-879d-43c6-83e3-8e5679291d53.jpg?im_w=320"
-                                text="Outdoor getaways" /></li>
+                                headline="Outdoor getaways" /></li>
                     <li><Item url="https://a0.muscache.com/im/pictures/2f13349d-879d-43c6-83e3-8e5679291d53.jpg?im_w=320"
-                                text="Outdoor getaways" /></li>
+                                headline="Outdoor getaways" /></li>
                     <li><Item url="https://a0.muscache.com/im/pictures/2f13349d-879d-43c6-83e3-8e5679291d53.jpg?im_w=320"
-                                text="Outdoor getaways" /></li>
+                                headline="Outdoor getaways" /></li>
                     <li><Item url="https://a0.muscache.com/im/pictures/2f13349d-879d-43c6-83e3-8e5679291d53.jpg?im_w=320"
-                                text="Outdoor getaways" /></li>
+                                headline="Outdoor getaways" /></li>
 
                 </ul>
             </Content>

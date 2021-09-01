@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Explore from "./components/section/Explore";
 import LiveAnywhere from "./components/section/LiveAnywhere";
 import Hosting from "./components/section/Hosting";
+import  Discover  from "./components/section/Discover";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
       <Explore />
       <LiveAnywhere />
       <Hosting />
+      <Discover />
       <GlobalStyle />
     </div>
   );
