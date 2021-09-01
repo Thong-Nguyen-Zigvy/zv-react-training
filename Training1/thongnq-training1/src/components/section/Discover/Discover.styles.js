@@ -14,6 +14,8 @@ export const Content = styled.div`
         list-style: none;
         overflow: auto hidden;
 
+        padding-inline-start: 0px;
+
         li{
             border-width: 0px 5px;
             max-width: 33.3333%;
