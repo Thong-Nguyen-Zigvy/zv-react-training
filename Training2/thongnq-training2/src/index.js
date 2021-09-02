@@ -9,6 +9,9 @@ import './index.css';
 //task2
 // import App from './task2/App';
 
+//task2
+// import App from './task3/App';
+
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
