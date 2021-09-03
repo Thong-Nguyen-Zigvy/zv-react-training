@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from "react";
 
 import axios from "axios";
 
-import Joke from "./task1/Joke";
+import Joke from "./Joke";
 
 import debounce from 'lodash.debounce';
 
