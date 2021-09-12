@@ -7,13 +7,13 @@ import './index.css';
 // import App from './task1/App';
 
 // task2
-import App from './task2/App';
+// import App from './task2/App';
 
 //task2
 // import App from './task3/App';
 
 
-// import App from './App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
