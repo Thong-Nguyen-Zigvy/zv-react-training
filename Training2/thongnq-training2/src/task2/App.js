@@ -1,19 +1,17 @@
-import React, {useState} from "react";
+import React from "react";
 
 import Modal from "./Modal";
 import CloseButton from "./CloseButton"; 
 
 function App() {
-  const [close, setClose] = useState(false);
-  const closeModal = () => {
-    setClose(true);
-  }
+
   return (
     <div className="App">
       <h1 className="text-red-500">Yooo</h1>
-      <Modal close={close}>
+      <Modal>
+      <div>hello</div>
         Hello
-        <CloseButton closeModal={closeModal}/>
+        <CloseButton />
       </Modal>
     </div>
   );

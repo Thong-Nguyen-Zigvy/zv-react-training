@@ -6,14 +6,14 @@ import './index.css';
 //task1
 // import App from './task1/App';
 
-//task2
-// import App from './task2/App';
+// task2
+import App from './task2/App';
 
 //task2
 // import App from './task3/App';
 
 
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
