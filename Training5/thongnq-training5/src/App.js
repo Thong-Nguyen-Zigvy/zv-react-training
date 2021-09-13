@@ -5,9 +5,6 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import HomePage from './pages/HomePage';
 import TaskPage from './pages/TaskPage';
 
-import {Provider} from 'react-redux';
-
-import store from './state/store';
 
 function App() {
   return (

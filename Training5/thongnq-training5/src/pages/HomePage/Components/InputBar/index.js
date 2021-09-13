@@ -6,7 +6,7 @@ const InputBar = () => {
     return (
         <div>
             <input type="text" id="myInput" placeholder="Title..." />
-            <button class="addBtn">Add</button>
+            <button className="addBtn">Add</button>
         </div>
     )
 }

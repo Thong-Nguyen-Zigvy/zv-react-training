@@ -7,18 +7,18 @@ import {
 
 const initialState = [];
 
-const todoReducer = (state = initialState, action) => {
+const todoReducer = (todos = initialState, action) => {
     const {type, payload} = action;
 
     switch (type){
         case CREATE_TODO:
-            return [...state, payload];
+            return [...todos, payload];
 
         case RETRIEVE_TODOS:
             return payload;
 
         case UPDATE_TODO:
-            return state.map(todo => {
+            return todos.map(todo => {
                 if(todo.id === payload.id){
                     return {...todo, ...payload};
                 } else {
@@ -27,10 +27,10 @@ const todoReducer = (state = initialState, action) => {
             });
 
         case DELETE_TODO:
-            return state.filter(todo => todo.id !== payload.id);
+            return todos.filter(todo => todo.id !== payload.id);
 
         default:
-            return state;
+            return todos;
     }
 }
 

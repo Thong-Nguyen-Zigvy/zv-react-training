@@ -4,12 +4,13 @@ import "./index.css";
 
 import Todo from './Todo';
 
-const TodoList = () => {
+
+const TodoList = ({todos}) => {
     return (
         <div>
             <ul id="myUL">
-            <Todo title="Hit the gym"></Todo>
-        </ul>
+            {todos.map(todo => <Todo key={todo.id} title={todo.name} />)}
+            </ul>
         </div>
     )
 }
