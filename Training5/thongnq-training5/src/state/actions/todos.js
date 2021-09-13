@@ -2,7 +2,8 @@ import {
     CREATE_TODO,
     RETRIEVE_TODOS,
     UPDATE_TODO,
-    DELETE_TODO
+    DELETE_TODO,
+    FILTER_TODO_BY_NAME
 } from "./type";
 
 import TodoDataService from "../../api.service";
@@ -66,5 +67,12 @@ export const deleteTodo = (id) => async (dispatch) => {
 
     } catch(err){
         console.log(err);
+    }
+}
+
+export const filterTodoByName = (name) => {
+    return {
+        type: FILTER_TODO_BY_NAME,
+        payload: {name}
     }
 }

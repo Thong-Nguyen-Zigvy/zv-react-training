@@ -1,9 +1,11 @@
 import React from 'react'
 import "./index.css";
 
-const Todo = ({title}) => {
+import { Link } from 'react-router-dom';
+
+const Todo = ({title, id, completed, showCompleted}) => {
     return (
-        <li>{title} <span className="close"></span></li>
+        <li className={completed && showCompleted ? "checked" : ""}><Link to={`/todos/${id}`}>{title} <span className="close"></span></Link></li>
 
     )
 }

@@ -5,11 +5,11 @@ import "./index.css";
 import Todo from './Todo';
 
 
-const TodoList = ({todos}) => {
+const TodoList = ({todos, showCompleted}) => {
     return (
         <div>
             <ul id="myUL">
-            {todos.map(todo => <Todo key={todo.id} title={todo.name} />)}
+            {todos.map(todo => <Todo key={todo.id} title={todo.name} id={todo.id} completed={todo.completed} showCompleted={showCompleted}/>)}
             </ul>
         </div>
     )

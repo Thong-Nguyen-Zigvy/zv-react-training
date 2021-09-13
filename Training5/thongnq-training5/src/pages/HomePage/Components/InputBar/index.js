@@ -1,12 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import "./index.css";
 
-const InputBar = () => {
+const InputBar = ({createNewTodo}) => {
+
+    const [text, setText] = useState("");
+
+    const handleCreateTodo = () => {
+        createNewTodo(text);
+    }
     return (
         <div>
-            <input type="text" id="myInput" placeholder="Title..." />
-            <button className="addBtn">Add</button>
+            <input type="text"
+                id="myInput"
+                placeholder="Title..."
+                value={text}
+                onChange={event => setText(event.target.value)}
+            />
+            <button className="addBtn" onClick={handleCreateTodo}>Add</button>
         </div>
     )
 }

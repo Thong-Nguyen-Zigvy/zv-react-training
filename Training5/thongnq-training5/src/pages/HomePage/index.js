@@ -1,32 +1,52 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import "./index.css";
 
 import InputBar from './Components/InputBar';
 import TodoList from './Components/TodoList';
+import Search from './Components/Search';
+import ToggleSwitch from './Components/ToggleSwitch';
 
 import {useDispatch, useSelector} from "react-redux"
 
-import {retrieveTodos} from "../../state/actions/todos";
+import {retrieveTodos, createTodo, filterTodoByName} from "../../state/actions/todos";
 
 function HomePage() {
 
-  const todos = useSelector(state => {
-    return state.todos;});
+  const [showCompleted, setShowCompleted] = useState(false);
+
+  console.log(showCompleted);
+
+  const todos = useSelector(state => state.todos);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     dispatch(retrieveTodos());
-  }, [])
+  }, [dispatch])
+
+  const createNewTodo = (name) => {
+    dispatch(createTodo(name, false));
+  }
+
+  const handleSeach = (name) => {
+    if(name.trim() === ""){
+      dispatch(retrieveTodos());
+    }
+    dispatch(filterTodoByName(name));
+  }
 
   return (
     <div className="HomePage">
       <div id="myDIV" className="header">
-        <h2>My To Do List</h2>
-        <InputBar />
-      </div>
+        <Search handleSearch={handleSeach}/>
 
-      <TodoList todos={todos}/>
+        <ToggleSwitch showCompleted={showCompleted} setShowCompleted={setShowCompleted}/>
+        <h2>My To Do List</h2>
+        <InputBar createNewTodo={createNewTodo}/>
+      </div>
+      {todos.length === 0 ? "No todo found!" : null}
+      <TodoList todos={todos} showCompleted={showCompleted}/>
     </div>
   );
 }

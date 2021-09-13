@@ -2,7 +2,8 @@ import {
     CREATE_TODO,
     RETRIEVE_TODOS,
     UPDATE_TODO,
-    DELETE_TODO
+    DELETE_TODO,
+    FILTER_TODO_BY_NAME
 } from "../actions/type";
 
 const initialState = [];
@@ -28,6 +29,9 @@ const todoReducer = (todos = initialState, action) => {
 
         case DELETE_TODO:
             return todos.filter(todo => todo.id !== payload.id);
+
+        case FILTER_TODO_BY_NAME:
+            return todos.filter(todo => todo.name.includes(payload.name));
 
         default:
             return todos;

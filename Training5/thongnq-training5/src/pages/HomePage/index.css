@@ -8,6 +8,7 @@
     padding: 30px 40px;
     color: white;
     text-align: center;
+    position: relative;
   }
 
   .header:after {
