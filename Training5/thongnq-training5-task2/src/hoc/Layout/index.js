@@ -1,5 +1,7 @@
 import React from 'react'
 
+import {Link} from 'react-router-dom';
+
 import { Wrapper, Content, TopNav, Footer, SideBar } from './Layout.styles'
 
 const Layout = ({children}) => {
@@ -7,9 +9,9 @@ const Layout = ({children}) => {
         <Wrapper>
             
                 <TopNav>
-                    <a href="#">
+                    <Link to="/app">
                         <img src="https://zigvy.com/wp-content/uploads/2017/12/zigvy-logo.svg" alt="Corporation" />
-                    </a>
+                    </Link>
                     <div>
                         User
                     </div>
@@ -17,9 +19,9 @@ const Layout = ({children}) => {
                 <Content>
                     <SideBar>
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">User</a></li>
-                            <li><a href="#">My Info</a></li>
+                            <li><Link to="/app">Home</Link></li>
+                            <li><Link to="/app/users">Users</Link></li>
+                            <li><Link to="/app/my-info">My Info</Link></li>
                         </ul>
                     </SideBar>
                     <div className="mainContent">{children}</div>

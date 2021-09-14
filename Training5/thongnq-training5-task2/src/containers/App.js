@@ -13,7 +13,7 @@ function App() {
     <Router>
       <Switch>
           <Route path="/login" component={Auth} />
-          <Route path={['/app', "/app/users", "/app/users/:userId", "app/my-info"]}>
+          <Route path={['/app', "/app/users", "/app/users/:userId", "/app/my-info"]}>
             <Layout>
               <Route path="/app" component={Home} />
             </Layout>
