@@ -1,11 +1,33 @@
-import React, {useState, useRef} from "react";
+import React, {useState,useEffect, useRef} from "react";
 
 import Button from "./task3/Button";
 
 function App() {
 
   const [count, setCount] = useState(0);
+  const [startInt, setStartInt] = useState(false);
   const [intervalId, setIntervalId] = useState(0);
+  const [error, setError] = useState("");
+  
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if(count <= 0){
+      clearInterval(intervalId);
+      setIntervalId(0);
+      setStartInt(false);
+    }
+  }, [count, intervalId])
+
+
+  useEffect(() => {
+    if(startInt === true){
+      const newIntervalId = setInterval(() => {      
+        setCount(prevCount => prevCount - 1);
+      }, 1000);
+      setIntervalId(newIntervalId);
+    }
+  }, [startInt])
 
   const handleClick = () => {
 
@@ -17,31 +39,36 @@ function App() {
     } else if (parseInt(userInput) <= 0){
       setError("Number must be greater than 0");
     } else {
-      setCount(parseInt(userInput));
+      setError("");
+      
+      if(count === 0){
+        setCount(parseInt(userInput));
+        setStartInt(true);
+      } else {
+        setStartInt(true);
 
-      const newIntervalId = setInterval(() => {
-        console.log(count);
-        setCount(prevCount =>{
-          if(prevCount <= 1 ){
-            clearInterval(newIntervalId);
-            setIntervalId(0);
-            return 0;
-          }
-          return prevCount - 1});
-      }, 1000);
-      setIntervalId(newIntervalId);
+      }
+      // const newIntervalId = setInterval(() => {
+      //   console.log(count);
+      //   setCount(prevCount =>{
+      //     if(prevCount <= 1 ){
+      //       clearInterval(newIntervalId);
+      //       setIntervalId(0);
+      //       return 0;
+      //     }
+      //     return prevCount - 1});
+      // }, 1000);
+      // setIntervalId(newIntervalId);
   };
 
 }
 
-  const [error, setError] = useState("");
-
-  const inputRef = useRef(null);
 
 
   const stopCounter = () => {
     clearInterval(intervalId);
-        setIntervalId(0);
+    setIntervalId(0);
+    setStartInt(false);
   }
 
 
@@ -52,9 +79,9 @@ function App() {
       <label for="num">Enter a number</label> <br/>
       <input id="num" type="text" ref={inputRef} /><br/>
       <Button action={handleClick}>
-        Start
+        {count === 0 ? "Start" : "resume"}
       </Button>
-      {intervalId ? <Button action={stopCounter}>Stop</Button> : null}
+      {count !== 0 ? <Button action={stopCounter}>Stop</Button> : null}
     </div>
   );
 }
