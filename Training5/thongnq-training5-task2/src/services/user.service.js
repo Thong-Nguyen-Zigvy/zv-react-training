@@ -10,7 +10,7 @@ class UserService {
     }
 
     getUserInfo() {
-            return axios.get(API_URL + "/my", {headers: authHeader()});
+        return axios.get(API_URL + "/my", {headers: authHeader()});
     }
 }
 
