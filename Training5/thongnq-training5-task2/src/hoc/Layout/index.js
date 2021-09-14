@@ -4,7 +4,24 @@ import {Link} from 'react-router-dom';
 
 import { Wrapper, Content, TopNav, Footer, SideBar } from './Layout.styles'
 
+import {useDispatch} from "react-redux";
+
+import {logout} from "../../state/actions/auth"
+
+import {useHistory} from "react-router-dom"
+
+
 const Layout = ({children}) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const handleLogout = () => {
+        dispatch(logout());
+        
+            history.push("/login");
+        
+    }
+
     return (
         <Wrapper>
             
@@ -14,6 +31,7 @@ const Layout = ({children}) => {
                     </Link>
                     <div>
                         User
+                        <button onClick={handleLogout}>Logout</button>
                     </div>
                 </TopNav>
                 <Content>

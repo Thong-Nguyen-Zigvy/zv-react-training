@@ -1,7 +1,8 @@
 import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
-    LOGOUT
+    LOGOUT,
+    GET_USER_INFO
 } from "../actions/types";
 
 const user = JSON.parse(localStorage.getItem("user"));
@@ -26,6 +27,13 @@ const auth = (state = inititalState, action) => {
             return {...state,
                 isLoggedIn: false,
                 user: null};
+        
+        case GET_USER_INFO:
+            return {
+                ...state,
+                isLoggedIn: true,
+                user: {...user, ...payload}
+            }
 
         default:
             return state;
