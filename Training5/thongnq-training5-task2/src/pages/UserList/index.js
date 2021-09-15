@@ -7,7 +7,7 @@ import {Link} from "react-router-dom"
 import {useParams} from "react-router"
 import {getUsers} from "../../state/actions/user"
 
-import UserDetail from '../../components/UserDetail'
+import UserDetail from '../../commons/UserDetail'
 
 import {Redirect} from "react-router-dom"
 

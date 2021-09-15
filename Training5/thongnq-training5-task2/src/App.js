@@ -1,11 +1,11 @@
 import React from 'react'
 
-import Auth from './Auth';
+import Auth from './pages/Auth';
 
-import Layout from '../hoc/Layout';
-import Home from '../components/Home';
-import UserInfo from './UserInfo';
-import UserList from './UserList';
+import Layout from './hoc/Layout';
+import Home from './pages/Home';
+import UserInfo from './pages/UserInfo';
+import UserList from './pages/UserList';
 
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom"
 import {useSelector} from "react-redux"

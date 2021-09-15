@@ -63,3 +63,32 @@ export const SideBar = styled.div`
         }
     }
 `
+
+export const UserButton = styled.button`
+    width: 60px;
+    height: 60px;
+    background-color: palevioletred;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+`
+
+export const UserInfoBar = styled.div`
+    display: ${props => props.show ? "block" : "none"};
+    background-color: darkgray;
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    width: 100px;
+    div{
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    button{
+        width: 100%;
+        cursor: pointer;
+    }
+`

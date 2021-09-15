@@ -4,7 +4,7 @@ import {Wrapper} from "./UserInfo.styles";
 import {useDispatch, useSelector} from "react-redux";
 import {getUserInfo} from "../../state/actions/user";
 
-import UserDetail from '../../components/UserDetail';
+import UserDetail from '../../commons/UserDetail';
 
 const UserInfo = () => {
     const dispatch = useDispatch();

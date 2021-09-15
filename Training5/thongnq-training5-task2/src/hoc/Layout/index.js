@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import {Link} from 'react-router-dom';
 
-import { Wrapper, Content, TopNav, Footer, SideBar } from './Layout.styles'
+import { Wrapper, Content, TopNav, Footer, SideBar, UserButton, UserInfoBar } from './Layout.styles'
 
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import {logout} from "../../state/actions/auth"
 
@@ -12,18 +12,25 @@ import {clearUsers} from "../../state/actions/user"
 
 import {useHistory} from "react-router-dom"
 
+import jwt_decode from "jwt-decode";
+
 
 const Layout = ({children}) => {
+    const [showUserBar, setShowUserBar] = useState(false);
+
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const user = jwt_decode(useSelector(state => state.auth.user.token));
+    const userShort = user.fullName.split(" ").reduce((short, name) => short + name[0], "");
 
     const handleLogout = () => {
         dispatch(logout());
         dispatch(clearUsers());
         history.push("/login");
-        
-    }
 
+    }
+    
     return (
         <Wrapper>
             
@@ -31,9 +38,12 @@ const Layout = ({children}) => {
                     <Link to="/app">
                         <img src="https://zigvy.com/wp-content/uploads/2017/12/zigvy-logo.svg" alt="Corporation" />
                     </Link>
-                    <div>
-                        User
-                        <button onClick={handleLogout}>Logout</button>
+                    <div style={{"position": "relative"}}>
+                        <UserButton onClick={() => setShowUserBar(!showUserBar)}>{userShort}</UserButton>
+                        <UserInfoBar show={showUserBar}>
+                            <div>{user.fullName}</div>
+                            <button onClick={handleLogout}>logout</button>
+                        </UserInfoBar>
                     </div>
                 </TopNav>
                 <Content>
