@@ -5,6 +5,7 @@ import Auth from './Auth';
 import Layout from '../hoc/Layout';
 import Home from '../components/Home';
 import UserInfo from './UserInfo';
+import UserList from './UserList';
 
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 
@@ -17,6 +18,9 @@ function App() {
           <Route path={['/app', "/app/users", "/app/users/:userId", "/app/my-info"]}>
             <Layout>
               <Switch>
+                
+                <Route path="/app/users/:userId" component={UserList} />
+                <Route path="/app/users" component={UserList} />
                 <Route path="/app/my-info" component={UserInfo}/>
                 <Route path="/app" component={Home} />
 

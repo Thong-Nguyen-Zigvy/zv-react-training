@@ -12,15 +12,13 @@ const UserInfo = () => {
         dispatch(getUserInfo());
     }, []);
 
-    console.log(user);
-
     return (
         <Wrapper>
             {Object.keys(user).map((key, index) => {
                 if(key === "token"){
                     return null;
                 }
-                return <h2>{key} : {user[key]},</h2>
+                return <h2 key={user[key].id}>{key} : {user[key]},</h2>
             })}
         </Wrapper>
     )

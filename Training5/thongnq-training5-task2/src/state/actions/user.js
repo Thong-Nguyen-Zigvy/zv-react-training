@@ -1,6 +1,7 @@
 import userService from "../../services/user.service";
 import {
-    GET_USER_INFO
+    GET_USER_INFO,
+    GET_USERS
 } from "./types";
 
 export const getUserInfo = () => dispatch =>{
@@ -20,4 +21,21 @@ export const getUserInfo = () => dispatch =>{
         }
     )
     
+}
+
+export const getUsers = () => dispatch => {
+    return userService.getUserList()
+    .then( response => {
+        dispatch({
+            type: GET_USERS,
+            payload: response.data
+        })
+
+        return Promise.resolve();
+        },
+        (error) => {
+            console.log(error);
+            return Promise.reject();
+        }
+    )
 }

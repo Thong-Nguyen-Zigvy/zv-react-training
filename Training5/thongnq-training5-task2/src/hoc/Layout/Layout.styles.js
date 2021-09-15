@@ -12,9 +12,6 @@ export const Content = styled.div`
     display: flex;
     height: calc(100vh - 120px);
 
-    .mainContent{
-        padding: 40px;
-    }
 `
 
 export const TopNav = styled.div`
