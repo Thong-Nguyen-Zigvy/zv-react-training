@@ -2,53 +2,26 @@ import React from "react";
 
 import {GlobalStyle, Wrapper, Content} from "./GlobalStyles";
 
+import AddTaskBar from "./components/AddTaskBar";
+
+import NetworkStatus from "./components/NetworkStatus";
+
+import TableTask from "./components/TableTask";
+
 function App() {
   return (
     <div className="App">
     
       <Wrapper>
         <Content>
-          <p className="network">Network: Online</p>
+
+          <NetworkStatus />
           <p className="sign">Task Submission</p>
           
-          <div className="form">
+          <AddTaskBar />
 
-            <input 
-              className="task" 
-              type="text" 
-              align="center" 
-              placeholder="Task Name"
-              />
-
-            <button className="submit" align="center">+ Task</button>
-
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Task Name</th>
-                <th>Status</th>
-              </tr>
-
-            </thead>
-
-            <tbody>
-
-              <tr>
-                <td>Backup DB</td>
-                <td>Ready</td>
-              </tr>
-              <tr>
-                <td>Backup DB</td>
-                <td>Ready</td>
-              </tr>
-              <tr>
-                <td>Backup DB</td>
-                <td>Ready</td>
-              </tr>
-            </tbody>
-          </table>
+          <TableTask />
+          
         </Content>
       </Wrapper>
       <GlobalStyle />
