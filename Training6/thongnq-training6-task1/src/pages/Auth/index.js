@@ -16,21 +16,14 @@ const Auth = () => {
 
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
-    console.log(auth);
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(login(email, password))
-        .then(() => {
-            if(auth.user){
-                history.push('/app');
-                window.location.reload();
-            }
-        })
-        .catch(() => {
-            console.log("error");
-        })
+        dispatch(login(email, password));
+        if(auth.user){
+            history.push('/app');
+            window.location.reload();
+        }
     }
 
     if(auth.isLoggedIn){
