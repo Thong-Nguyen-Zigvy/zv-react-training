@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+    box-sizing: border-box;
     width: 100vw;
     height: 100vh;
     background-color: #F3EBF6;
@@ -8,6 +9,7 @@ export const Wrapper = styled.div`
 `
 
 export const Content = styled.div`
+    box-sizing: border-box;
     background-color: #FFFFFF;
     width: 400px;
     height: 400px;
@@ -16,6 +18,7 @@ export const Content = styled.div`
     box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 
     .sign{
+        box-sizing: border-box;
         padding-top: 40px;
         color: #8C55AA;
         font-family: 'Ubuntu', sans-serif;

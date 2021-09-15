@@ -9,16 +9,24 @@ import AuthService from "../../services/auth.service";
 export const login = (email, password) => (dispatch) => {
     return AuthService.login(email, password).then(
         (data) => {
-            dispatch({
-                type: LOGIN_SUCCESS,
-                payload: {user:data}
-            })
+            if(data.error){
+                dispatch({
+                    type: LOGIN_FAIL,
+                    payload: {error: data.error}
+                })
+            } else {
+                dispatch({
+                    type: LOGIN_SUCCESS,
+                    payload: {user:data}
+                })
+            }
 
             return Promise.resolve();
         },
         (error) => {
             dispatch({
-                type:LOGIN_FAIL
+                type:LOGIN_FAIL,
+                payload: {error: error}
             })
 
             return Promise.reject();

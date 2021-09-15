@@ -7,6 +7,8 @@ import {Link} from "react-router-dom"
 import {useParams} from "react-router"
 import {getUsers} from "../../state/actions/user"
 
+import UserDetail from '../../components/UserDetail'
+
 
 const UserList = () => {
     const dispatch = useDispatch();
@@ -33,10 +35,8 @@ const UserList = () => {
             </List>
             <Content>
                 {userId ? 
-                     Object.keys(user).map((key, index) => {
-                        return <h2 key={user[key].id}>{key} : {user[key]},</h2>
-                    })
-                : "Please choose user to view user detail"
+                        <UserDetail user={user}/>
+                        : "Please choose user to view user detail"
                 }
             </Content>
         </Wrapper>

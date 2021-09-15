@@ -2,7 +2,9 @@ import React, {useEffect} from 'react';
 import {Wrapper} from "./UserInfo.styles";
 
 import {useDispatch, useSelector} from "react-redux";
-import {getUserInfo} from "../../state/actions/user"
+import {getUserInfo} from "../../state/actions/user";
+
+import UserDetail from '../../components/UserDetail';
 
 const UserInfo = () => {
     const dispatch = useDispatch();
@@ -14,12 +16,7 @@ const UserInfo = () => {
 
     return (
         <Wrapper>
-            {Object.keys(user).map((key, index) => {
-                if(key === "token"){
-                    return null;
-                }
-                return <h2 key={user[key].id}>{key} : {user[key]},</h2>
-            })}
+            <UserDetail user={user}/>
         </Wrapper>
     )
 }

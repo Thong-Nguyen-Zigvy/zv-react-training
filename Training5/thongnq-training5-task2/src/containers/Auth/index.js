@@ -15,15 +15,18 @@ const Auth = () => {
 
 
     const dispatch = useDispatch();
-    const auth = useSelector(state => {console.log(state); return state.auth});
+    const auth = useSelector(state => state.auth);
+    console.log(auth);
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(login(email, password))
         .then(() => {
-            history.push('/app');
-            window.location.reload();
+            if(auth.user){
+                history.push('/app');
+                window.location.reload();
+            }
         })
         .catch(() => {
             console.log("error");
@@ -38,6 +41,7 @@ const Auth = () => {
         <Wrapper>
             <Content>
                 <p className="sign" align="center">Sign in</p>
+                <p>{auth.error ? auth.error : null}</p>
                 <Form>
                     <input 
                     className="mail" 
