@@ -9,11 +9,18 @@ import {getUsers} from "../../state/actions/user"
 
 import UserDetail from '../../components/UserDetail'
 
+import {Redirect} from "react-router-dom"
+
 
 const UserList = () => {
     const dispatch = useDispatch();
+    
+    const {users, error} = useSelector(state => state.users);
 
-    const users = useSelector(state => state.users);
+    useEffect(() => {
+        dispatch(getUsers());
+    }, []);
+    
     let user = null;
 
 
@@ -21,12 +28,20 @@ const UserList = () => {
 
     if(userId){
         [user] = users.filter(user => user.id === userId);
+
+        if(!user){
+            alert("user not found");
+            return <Redirect to="/app/users" />
+        }
     }
 
 
-    useEffect(() => {
-        dispatch(getUsers());
-    }, []);
+
+    if(error){
+        alert(error);
+        return <Redirect to="/app" />
+    }
+
 
     return (
         <Wrapper>

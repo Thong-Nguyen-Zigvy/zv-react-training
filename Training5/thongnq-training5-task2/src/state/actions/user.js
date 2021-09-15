@@ -1,7 +1,9 @@
 import userService from "../../services/user.service";
 import {
     GET_USER_INFO,
-    GET_USERS
+    GET_USERS,
+    GET_USERS_FAIL,
+    CLEAR_USERS
 } from "./types";
 
 export const getUserInfo = () => dispatch =>{
@@ -34,8 +36,20 @@ export const getUsers = () => dispatch => {
         return Promise.resolve();
         },
         (error) => {
-            console.log(error);
+            if(error.response.status === 403){
+                dispatch({
+                    type: GET_USERS_FAIL,
+                    payload: error.response.data
+                })
+            }
             return Promise.reject();
         }
     )
+    
+}
+
+export const clearUsers = () => {
+    return ({
+        type: CLEAR_USERS,
+    })
 }

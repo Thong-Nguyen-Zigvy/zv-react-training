@@ -8,6 +8,8 @@ import {useDispatch} from "react-redux";
 
 import {logout} from "../../state/actions/auth"
 
+import {clearUsers} from "../../state/actions/user"
+
 import {useHistory} from "react-router-dom"
 
 
@@ -17,8 +19,8 @@ const Layout = ({children}) => {
 
     const handleLogout = () => {
         dispatch(logout());
-        
-            history.push("/login");
+        dispatch(clearUsers());
+        history.push("/login");
         
     }
 
