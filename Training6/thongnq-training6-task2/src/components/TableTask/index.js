@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import { Table } from './TableTask.styles';
 
 import {useSelector, useDispatch} from "react-redux";
 
-import {updateStatus} from "../../state/actions/tasks"
+import {updateStatusReady, updateDefault} from "../../state/actions/tasks"
 
 const TableTask = () => {
 
@@ -12,8 +12,12 @@ const TableTask = () => {
     console.log(tasks);
     const dispatch = useDispatch();
 
+    useEffect(() => {
+      dispatch(updateDefault());
+    }, [])
+
     const handleChangeStatus = (id) => {
-      dispatch(updateStatus(id));
+      dispatch(updateStatusReady(id));
     }
     return (
         <Table>
