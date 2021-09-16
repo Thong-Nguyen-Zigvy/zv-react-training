@@ -3,7 +3,8 @@ import {
     UPDATE_STATUS_SUBMITTING,
     UPDATE_STATUS_READY,
     UPDATE_STATUS_ERROR,
-    UPDATE_STATUS_SUCCESS
+    UPDATE_STATUS_SUCCESS,
+    UPDATE_STATUS_ERROR_SUBMIT
 } from "../actions/types";
 
 import {v4 as uuidv4} from 'uuid';
@@ -40,6 +41,14 @@ const tasks = (state = initialState, action) => {
                 }
                 return task;
             })
+        case UPDATE_STATUS_ERROR_SUBMIT:
+            return state.map(task => {
+                if(task.id === payload.id){
+                    return {...task, status: "Submitting"};
+                }
+                return task;
+            })
+            
         case UPDATE_STATUS_SUCCESS:
             return state.map(task => {
                 if(task.id === payload.id){

@@ -4,21 +4,26 @@ import { Table } from './TableTask.styles';
 
 import {useSelector, useDispatch} from "react-redux";
 
-import {updateStatusReady, updateDefault} from "../../state/actions/tasks"
+import {updateStatusReady, updateDefault, updateStatusErrorSubmit} from "../../state/actions/tasks"
 
 const TableTask = () => {
 
     const tasks = useSelector(state => state.tasks);
-    console.log(tasks);
     const dispatch = useDispatch();
 
     useEffect(() => {
       dispatch(updateDefault());
     }, [])
 
-    const handleChangeStatus = (id) => {
-      dispatch(updateStatusReady(id));
+    const handleChangeStatus = (id, status) => {
+      if(status === "Draft"){
+        dispatch(updateStatusReady(id));
+      } else {
+        dispatch(updateStatusErrorSubmit(id));
+
+      }
     }
+    
     return (
         <Table>
             <thead>
@@ -35,8 +40,8 @@ const TableTask = () => {
                   <td>{task.name}</td>
                   {/* disabled={true} */}
                   <td><button 
-                  onClick={() => handleChangeStatus(task.id)}
-                  disabled={task.status !== "Draft" ? true : false}
+                  onClick={() => handleChangeStatus(task.id, task.status)}
+                  disabled={task.status !== "Draft" && task.status !== "Error" ? true : false}
                   >
                   {task.status}
                   </button>
