@@ -1,6 +1,6 @@
 import {
-    UPDATE_NETWORK_ONLINE,
-    UPDATE_NETWORK_OFFLINE
+    UPDATE_NETWORK,
+    
 } from "../actions/types";
 
 const initialState = {status: "Online"};
@@ -8,11 +8,8 @@ const initialState = {status: "Online"};
 const network = (state = initialState, action) => {
 
     switch (action.type) {
-        case UPDATE_NETWORK_ONLINE:
-            return {...state, status: "Online"}
-
-        case UPDATE_NETWORK_OFFLINE:
-            return {...state, status: "Offline"}
+        case UPDATE_NETWORK:
+            return {...state, status: state.status === "Online" ? "Offline" : "Online"}
 
         default: 
             return state;

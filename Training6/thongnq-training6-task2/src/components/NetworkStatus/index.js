@@ -4,7 +4,7 @@ import { Para } from './NetworkStatus.styles';
 
 import {useDispatch, useSelector} from "react-redux";
 
-import {updateNetworkOnline, updateNetworkOffline} from "../../state/actions/network"
+import {updateNetwork} from "../../state/actions/network"
 
 const NetworkStatus = () => {
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const NetworkStatus = () => {
     const status = useSelector(state => state.network.status);
 
     const handleChangeStatus = () => {
-        status === "Online" ? dispatch(updateNetworkOffline()) : dispatch(updateNetworkOnline());
+        dispatch(updateNetwork());
     }
 
     return <Para>Network: <button onClick={handleChangeStatus}>{status}</button></Para>

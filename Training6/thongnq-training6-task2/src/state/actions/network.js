@@ -1,8 +1,6 @@
 import {
-    UPDATE_NETWORK_ONLINE,
-    UPDATE_NETWORK_OFFLINE
+    UPDATE_NETWORK,
 } from "./types";
 
-export const updateNetworkOnline = () => ({type: UPDATE_NETWORK_ONLINE});
+export const updateNetwork = () => ({type: UPDATE_NETWORK});
 
-export const updateNetworkOffline = ()=> ({type: UPDATE_NETWORK_OFFLINE});
