@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from "react";
+import React, {useState, useEffect, useMemo} from "react";
 
 import axios from "axios";
 
@@ -17,7 +17,7 @@ const App = () => {
     })
   }
 
-  const debounceOnChange = useCallback(debounce(hanldeLoadCountry, 1000), []);
+  const debounceOnChange = useMemo(() => debounce(hanldeLoadCountry, 1000), []);
 
   useEffect(() => {
     hanldeLoadCountry(countriesAPI + "/all");
