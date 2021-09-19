@@ -9,10 +9,11 @@ const Modal = ({children}) => {
   }
 
   const childrenWithProps = React.Children.map(children, child => {
-      if(CloseButton === child.type) {
-          return React.cloneElement(child, {closeModal})
-      }
-      return child;
+    if(typeof child.type === "string"){
+        return child;
+    }
+
+    return React.cloneElement(child, {closeModal})
   })
     return (<>
     
