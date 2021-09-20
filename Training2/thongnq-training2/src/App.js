@@ -6,27 +6,26 @@ function App() {
 
   const [count, setCount] = useState(0);
   const [startInt, setStartInt] = useState(false);
-  const [intervalId, setIntervalId] = useState(0);
   const [error, setError] = useState("");
   
   const inputRef = useRef(null);
 
   useEffect(() => {
     if(count <= 0){
-      clearInterval(intervalId);
-      setIntervalId(0);
       setStartInt(false);
     }
-  }, [count, intervalId])
+  }, [count])
 
 
   useEffect(() => {
+    let newIntervalId;
     if(startInt === true){
-      const newIntervalId = setInterval(() => {      
+      newIntervalId = setInterval(() => {      
         setCount(prevCount => prevCount - 1);
       }, 1000);
-      setIntervalId(newIntervalId);
     }
+
+    return () => clearInterval(newIntervalId);
   }, [startInt])
 
   const handleClick = () => {
@@ -66,8 +65,6 @@ function App() {
 
 
   const stopCounter = () => {
-    clearInterval(intervalId);
-    setIntervalId(0);
     setStartInt(false);
   }
 
