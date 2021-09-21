@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 
 import "./index.css";
 
@@ -14,10 +14,22 @@ import {retrieveTodos, createTodo} from "../../state/actions/todos";
 function HomePage() {
 
   const [showCompleted, setShowCompleted] = useState(false);
-  const [searchTodos, setSearchTodos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const todos = useSelector(state => state.todos);
   const dispatch = useDispatch();
+
+  const getVisibleTodos = React.useMemo(() => {
+    if(searchTerm.trim() === "" && !showCompleted){
+      return todos;
+    } else if(searchTerm.trim() !== "" && !showCompleted){
+      return todos.filter(todo => todo.name.includes(searchTerm));
+    } else if(searchTerm.trim() === "" && showCompleted){
+      return todos.filter(todo => !todo.completed)
+    } else {
+      return todos.filter(todo => !todo.completed).filter(todo => todo.name.includes(searchTerm));
+    }
+  }, [searchTerm, showCompleted, todos]);
 
 
   useEffect(() => {
@@ -29,11 +41,7 @@ function HomePage() {
   }
 
   const handleSeach = (name) => {
-    if(name.trim() === ""){
-      setSearchTodos([]);
-    } else {
-      setSearchTodos(todos.filter(todo => todo.name.includes(name)));
-    }
+    setSearchTerm(name);
   }
 
   return (
@@ -46,7 +54,7 @@ function HomePage() {
         <InputBar createNewTodo={createNewTodo}/>
       </div>
       {todos.length === 0 ? "No todo found!" : null}
-      <TodoList todos={searchTodos.length === 0 ? todos : searchTodos} showCompleted={showCompleted}/>
+      <TodoList todos={getVisibleTodos}/>
     </div>
   );
 }
