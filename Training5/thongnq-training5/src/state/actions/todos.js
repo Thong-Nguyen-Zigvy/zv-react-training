@@ -69,10 +69,3 @@ export const deleteTodo = (id) => async (dispatch) => {
         console.log(err);
     }
 }
-
-export const filterTodoByName = (name) => {
-    return {
-        type: FILTER_TODO_BY_NAME,
-        payload: {name}
-    }
-}

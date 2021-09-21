@@ -9,13 +9,12 @@ import ToggleSwitch from './Components/ToggleSwitch';
 
 import {useDispatch, useSelector} from "react-redux"
 
-import {retrieveTodos, createTodo, filterTodoByName} from "../../state/actions/todos";
+import {retrieveTodos, createTodo} from "../../state/actions/todos";
 
 function HomePage() {
 
   const [showCompleted, setShowCompleted] = useState(false);
-
-  console.log(showCompleted);
+  const [searchTodos, setSearchTodos] = useState([]);
 
   const todos = useSelector(state => state.todos);
   const dispatch = useDispatch();
@@ -31,9 +30,10 @@ function HomePage() {
 
   const handleSeach = (name) => {
     if(name.trim() === ""){
-      dispatch(retrieveTodos());
+      setSearchTodos([]);
+    } else {
+      setSearchTodos(todos.filter(todo => todo.name.includes(name)));
     }
-    dispatch(filterTodoByName(name));
   }
 
   return (
@@ -46,7 +46,7 @@ function HomePage() {
         <InputBar createNewTodo={createNewTodo}/>
       </div>
       {todos.length === 0 ? "No todo found!" : null}
-      <TodoList todos={todos} showCompleted={showCompleted}/>
+      <TodoList todos={searchTodos.length === 0 ? todos : searchTodos} showCompleted={showCompleted}/>
     </div>
   );
 }
