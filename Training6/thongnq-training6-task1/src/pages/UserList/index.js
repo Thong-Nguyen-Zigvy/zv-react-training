@@ -12,30 +12,18 @@ import UserDetail from '../../commons/UserDetail'
 import {Redirect} from "react-router-dom"
 
 
-const UserList = () => {
+const UserList = ({children}) => {
     const dispatch = useDispatch();
     
     const {users, error} = useSelector(state => state.users);
 
+    console.log(users);
+
     useEffect(() => {
-        dispatch(getUsers());
-    }, []);
-    
-    let user = null;
-
-
-    const {userId} = useParams();
-
-    if(userId){
-        [user] = users.filter(user => user.id === userId);
-
-        if(!user){
-            alert("user not found");
-            return <Redirect to="/app/users" />
+        if(!users || users.length === 0){
+            dispatch(getUsers());
         }
-    }
-
-
+    }, []);
 
     if(error){
         alert(error);
@@ -49,8 +37,8 @@ const UserList = () => {
                 {users.map(user => <li key={user.id}><Link to={`/app/users/${user.id}`}>{user.fullName} </Link></li>)}
             </List>
             <Content>
-                {userId ? 
-                        <UserDetail user={user}/>
+                {children ? 
+                        children
                         : "Please choose user to view user detail"
                 }
             </Content>
