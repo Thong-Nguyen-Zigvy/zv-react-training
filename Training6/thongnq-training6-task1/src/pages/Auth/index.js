@@ -22,7 +22,6 @@ const Auth = () => {
         dispatch(login(email, password));
         if(auth.user){
             history.push('/app');
-            window.location.reload();
         }
     }
 
