@@ -19,7 +19,7 @@ function HomePage() {
   const todos = useSelector(state => state.todos);
   const dispatch = useDispatch();
 
-  const getVisibleTodos = React.useMemo(() => {
+  const getVisibleTodos = useMemo(() => {
     if(searchTerm.trim() === "" && !showCompleted){
       return todos;
     } else if(searchTerm.trim() !== "" && !showCompleted){
