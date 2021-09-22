@@ -1,5 +1,5 @@
 import {actionChannel, fork, call, take, put, select, takeEvery, all} from "redux-saga/effects";
-
+import { eventChannel } from "@redux-saga/core";
 import {
     UPDATE_STATUS,
     UPDATE_NETWORK,
@@ -15,6 +15,41 @@ const delay = (ms) => new Promise((res, rej) => {
 let networkStatus;
 
 const queueActionOffline = [];
+
+
+//network
+function createNetworkChannel() {
+    return eventChannel(emit => {
+        const networkOnline = (e) => {
+            emit('Online');
+        }
+        const networkOffline = (e) => {
+            emit('Offline');
+        }
+
+        window.addEventListener('offline', networkOffline);
+
+        window.addEventListener('online', networkOnline);
+
+        return () => {
+            window.removeEventListener('offline', networkOffline);
+
+            window.removeEventListener('online', networkOnline);
+        }
+    })
+}
+
+export function* watchNetwork() {
+    const channel = yield call(createNetworkChannel);
+    while(true){
+        try {
+            const networkStatus = yield take(channel);
+            yield put({type: UPDATE_NETWORK, payload: {status: networkStatus}})
+        } catch (error) {
+            console.error(error)
+        }
+    }
+}
 
 //handler
 function* handleChangeNetwork() {
@@ -56,11 +91,10 @@ export function* watchStatus() {
     
 }
 
-export function* watchNetwork() {
-    yield takeEvery(UPDATE_NETWORK, handleChangeNetwork)
-    networkStatus = yield select((state) => state.network.status);
-
-}
+// export function* watchNetwork() {
+//     yield takeEvery(UPDATE_NETWORK, handleChangeNetwork)
+//     networkStatus = yield select((state) => state.network.status);
+// }
 
 
 

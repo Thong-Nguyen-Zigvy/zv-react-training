@@ -9,7 +9,7 @@ const network = (state = initialState, action) => {
 
     switch (action.type) {
         case UPDATE_NETWORK:
-            return {...state, status: state.status === "Online" ? "Offline" : "Online"}
+            return {...state, status: action.payload.status}
 
         default: 
             return state;
