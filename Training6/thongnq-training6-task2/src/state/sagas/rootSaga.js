@@ -1,12 +1,9 @@
 import {actionChannel, fork, call, take, put, select, takeEvery, all} from "redux-saga/effects";
 
 import {
-    UPDATE_STATUS_READY,
-    UPDATE_STATUS_SUBMITTING,
-    UPDATE_STATUS_ERROR,
-    UPDATE_STATUS_SUCCESS,
-    UPDATE_STATUS_ERROR_SUBMIT,
-    UPDATE_NETWORK} from "../actions/types";
+    UPDATE_STATUS,
+    UPDATE_NETWORK,
+    UPDATE_STATUS_READY} from "../actions/types";
 
 const delay = (ms) => new Promise((res, rej) => {
     const decideStatus = () => {
@@ -33,11 +30,11 @@ function* handleChangeNetwork() {
 
 function* handleStatus(payload){
     try{
-        yield put({type: UPDATE_STATUS_SUBMITTING, payload: {id: payload.id}})
+        yield put({type: UPDATE_STATUS, payload: {id: payload.id, status: 'Submitting'}})
         yield delay(2000);
-        yield put({type: UPDATE_STATUS_SUCCESS, payload: {id: payload.id}})
+        yield put({type: UPDATE_STATUS, payload: {id: payload.id, status: 'Success'}})
     } catch (e) {
-        yield put({type: UPDATE_STATUS_ERROR, payload: {id: payload.id}})
+        yield put({type: UPDATE_STATUS, payload: {id: payload.id, status: 'Error'}})
 
     }
 }
@@ -45,7 +42,7 @@ function* handleStatus(payload){
 
 
 //watcher
-export function* watchStatusReady() {
+export function* watchStatus() {
     const requestChan = yield actionChannel(UPDATE_STATUS_READY);
     while(true){
             const {payload} = yield take(requestChan)
@@ -65,24 +62,11 @@ export function* watchNetwork() {
 
 }
 
-export function* watchStatusResubmit(){
-    const requestErrorResubmit = yield actionChannel(UPDATE_STATUS_ERROR_SUBMIT);
-    while(true){
-        const {payload} = yield take(requestErrorResubmit)
-
-        if(networkStatus === "Online"){
-            yield call(handleStatus, payload);
-        } else {
-            queueActionOffline.push(payload);
-        }
-    }
-}
 
 
 export function* rootSaga(){
     yield all([
         fork(watchNetwork),
-        fork(watchStatusReady),
-        fork(watchStatusResubmit)
+        fork(watchStatus)
     ])
 }

@@ -4,7 +4,7 @@ import { Table } from './TableTask.styles';
 
 import {useSelector, useDispatch} from "react-redux";
 
-import {updateStatusReady, updateDefault, updateStatusErrorSubmit} from "../../state/actions/tasks"
+import {updateDefault, updateStatusReady} from "../../state/actions/tasks"
 
 const TableTask = () => {
 
@@ -13,15 +13,10 @@ const TableTask = () => {
 
     useEffect(() => {
       dispatch(updateDefault());
-    }, [])
+    }, [dispatch])
 
-    const handleChangeStatus = (id, status) => {
-      if(status === "Draft"){
-        dispatch(updateStatusReady(id));
-      } else {
-        dispatch(updateStatusErrorSubmit(id));
-
-      }
+    const handleChangeStatus = (id) => {
+      dispatch(updateStatusReady(id))
     }
     
     return (
@@ -40,7 +35,7 @@ const TableTask = () => {
                   <td>{task.name}</td>
                   {/* disabled={true} */}
                   <td><button 
-                  onClick={() => handleChangeStatus(task.id, task.status)}
+                  onClick={() => handleChangeStatus(task.id)}
                   disabled={task.status !== "Draft" && task.status !== "Error" ? true : false}
                   >
                   {task.status}
