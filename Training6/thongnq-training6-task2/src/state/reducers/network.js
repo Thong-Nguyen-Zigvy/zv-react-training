@@ -3,7 +3,7 @@ import {
     
 } from "../actions/types";
 
-const initialState = {status: "Online"};
+const initialState = {status: navigator.onLine ? "Online" : "Offline"};
 
 const network = (state = initialState, action) => {
 

@@ -1,4 +1,4 @@
-import {actionChannel, fork, call, take, put, select, takeEvery, all} from "redux-saga/effects";
+import {actionChannel, fork, call, take, put, select, all} from "redux-saga/effects";
 import { eventChannel } from "@redux-saga/core";
 import {
     UPDATE_STATUS,
@@ -12,9 +12,6 @@ const delay = (ms) => new Promise((res, rej) => {
     setTimeout(decideStatus, ms);
 });
 
-let networkStatus;
-
-const queueActionOffline = [];
 
 
 //network
@@ -43,8 +40,16 @@ export function* watchNetwork() {
     const channel = yield call(createNetworkChannel);
     while(true){
         try {
-            const networkStatus = yield take(channel);
-            yield put({type: UPDATE_NETWORK, payload: {status: networkStatus}})
+            const status = yield take(channel);
+            yield put({type: UPDATE_NETWORK, payload: {status: status}});
+            if(status === "Online"){
+                const tasks = yield select((state) => state.tasks);
+                for(let i= 0; i < tasks.length; i++) {
+                    if(tasks[i].status === 'Ready'){
+                        yield call(handleStatus, tasks[i]);
+                    };
+                }
+            } 
         } catch (error) {
             console.error(error)
         }
@@ -52,25 +57,28 @@ export function* watchNetwork() {
 }
 
 //handler
-function* handleChangeNetwork() {
-    networkStatus = yield select((state) => state.network.status);
+// function* handleChangeNetwork() {
+//     networkStatus = yield select((state) => state.network.status);
     
-    if(networkStatus === "Online" && queueActionOffline.length !== 0){
-        while(queueActionOffline.length !== 0){
+//     if(networkStatus === "Online" && queueActionOffline.length !== 0){
+//         while(queueActionOffline.length !== 0){
 
-            yield call(handleStatus, queueActionOffline.shift());
-        }
-    }
-}
+//             yield call(handleStatus, queueActionOffline.shift());
+//         }
+//     }
+// }
 
 function* handleStatus(payload){
-    try{
-        yield put({type: UPDATE_STATUS, payload: {id: payload.id, status: 'Submitting'}})
-        yield delay(2000);
-        yield put({type: UPDATE_STATUS, payload: {id: payload.id, status: 'Success'}})
-    } catch (e) {
-        yield put({type: UPDATE_STATUS, payload: {id: payload.id, status: 'Error'}})
-
+    let networkStatus = yield select((state) => state.network.status);
+    if(networkStatus === 'Online'){
+        try{
+            yield put({type: UPDATE_STATUS, payload: {id: payload.id, status: 'Submitting'}})
+            yield delay(2000);
+            yield put({type: UPDATE_STATUS, payload: {id: payload.id, status: 'Success'}})
+        } catch (e) {
+            yield put({type: UPDATE_STATUS, payload: {id: payload.id, status: 'Error'}})
+    
+        }
     }
 }
 
@@ -80,21 +88,12 @@ function* handleStatus(payload){
 export function* watchStatus() {
     const requestChan = yield actionChannel(UPDATE_STATUS_READY);
     while(true){
-            const {payload} = yield take(requestChan)
-
-            if(networkStatus === "Online"){
-                yield call(handleStatus, payload);
-            } else {
-                queueActionOffline.push(payload);
-            }
+        const {payload} = yield take(requestChan)
+        yield call(handleStatus, payload);
     }
     
 }
 
-// export function* watchNetwork() {
-//     yield takeEvery(UPDATE_NETWORK, handleChangeNetwork)
-//     networkStatus = yield select((state) => state.network.status);
-// }
 
 
 
